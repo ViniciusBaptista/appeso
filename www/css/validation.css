@@ -1,0 +1,41 @@
+@import "compass";
+
+/* Styles */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Open Sans";
+  font-size: 14px;
+}
+
+label,
+input,
+button {
+  border: 0;
+  margin-bottom: 3px;
+  display: block;
+  width: 100%;
+}
+
+input {
+  height: 25px;
+  line-height: 25px;
+  background: #fff;
+  color: #000;
+  padding: 0 6px;
+}
+
+.error {
+  color: #ff0000;
+}
+
+.article-reference {
+  margin-top: 15px;
+}
+
+a {
+  color: #e67e22;
+}
