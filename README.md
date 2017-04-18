@@ -11,6 +11,12 @@ Antes de tudo você deve possuir o **git** instalado em sua máquina.
 Neste projeto é necessário ter o **cordova** instalado.
 >[Não tenho o **cordova** instalado](https://github.com/ViniciusBaptista/appeso/wiki/Cordova)
 
+Com os requisitos instalados é importante adicionar a plataforma para qual irá desenvolver. No caso do android:
+```
+cordova platform add android
+```
+>**IMPORTANTE: não usar o comando --save pois ele inclui parametros no arquivo config.xml e pode dar conflito de versões de um computador para outro**
+
 ### Facilidades:
 
 Caso você queira usar o **Docker** para rodar o ambiente necessário, com o cordova, node, android, npm... 
