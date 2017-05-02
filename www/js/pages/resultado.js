@@ -26,3 +26,17 @@ function pagecontainershow_resultado(e,ui){
 	var txtImc = imcNumber.toString().replace(".", ",");
 	$('#txtImc').text(txtImc);
 };
+
+function publishAImage() {
+	facebookConnectPlugin.showDialog( 
+    {
+        method: "feed",
+        media:'link da imagem',
+        name:'Test Post',
+        message:'First photo post',    
+        caption: 'Testing using phonegap plugin',
+        description: 'Posting photo using phonegap facebook plugin'
+    }, 
+    function (response) { alert(JSON.stringify(response)) },
+    function (response) { alert(JSON.stringify(response)) });
+}
