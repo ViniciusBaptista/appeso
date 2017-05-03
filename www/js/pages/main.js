@@ -53,24 +53,39 @@ $(document).ready(function(){
   });
 });
 
-function valid() {
-	if(validAltura && validPeso) {
-		calcular();
+//http://meumobi.github.io/stocks%20apis/2016/03/13/get-realtime-stock-quotes-yahoo-finance-api.html
+var main = {
+	login: function() {
+    facebookConnectPlugin.login(["public_profile"], function (response) {
+    	console.log(JSON.stringify(response));
+    }, function (response) {
+    	console.log(JSON.stringify(response));
+    });
+	},
+
+	isLogged: function () {
+		facebookConnectPlugin.getLoginStatus(function (status) {
+			console.log("current status: " + JSON.stringify(status));
+		});
+	},
+
+	calcular: function() {
+		//ler dados dos inputs
+		var txtAltura = $('#txtAltura').val();
+		var txtPeso = $('#txtPeso').val();
+		//calcular a formula do IMC
+		var altura = parseFloat(txtAltura) / 100;
+		var peso = parseFloat(txtPeso);
+		var imc = peso/(altura*altura);
+		//salvar no sessionstorage
+		sessionStorage.setItem("imc", imc.toString() );
+	   //navegar para a próxima página
+		$.mobile.pageContainer.pagecontainer("change", "pages/resultado.html");
+	},
+
+	valid: function() {
+		if(validAltura && validPeso) {
+			this.calcular();
+		}
 	}
 }
-
-function calcular(){
-	//ler dados dos inputs
-	var txtAltura = $('#txtAltura').val();
-	var txtPeso = $('#txtPeso').val();
-	//calcular a formula do IMC
-	var altura = parseFloat(txtAltura) / 100;
-	var peso = parseFloat(txtPeso);
-	var imc = peso/(altura*altura);
-	//salvar no sessionstorage
-	sessionStorage.setItem("imc", imc.toString() );
-   //navegar para a próxima página
-	$.mobile.pageContainer.pagecontainer("change", "pages/resultado.html");
-
-}
-//http://meumobi.github.io/stocks%20apis/2016/03/13/get-realtime-stock-quotes-yahoo-finance-api.html
