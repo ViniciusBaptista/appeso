@@ -73,7 +73,7 @@ Na página de [Desenvolvedor do Facebook](https://developers.facebook.com/apps)
 No diretório do projeto, digitar o comando que inclui o plugin:
 
 ~~~
-$ cordova -d plugin add phonegap-facebook-plugin --variable APP_ID="APP_ID" --variable APP_NAME="NOME_APP"
+cordova -d plugin add phonegap-facebook-plugin --variable APP_ID="APP_ID" --variable APP_NAME="NOME_APP"
 ~~~
 
 . . .
