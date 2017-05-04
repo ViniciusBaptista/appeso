@@ -3,9 +3,6 @@ author: |
   | Giuliana Marquesi
   | Vinícius Baptista
 date: "4 de maio de 2017"
-header-includes:
-  \pgfdeclareimage[width=3.25cm]{logo}{img/logo2.png}
-  \logo{\pgfuseimage{logo}}
 ---
 
 # Integração com o Facebook
@@ -18,14 +15,43 @@ Vinicius Baptista
 ## Conta desenvolvedor
 
 ### Criar ID do projeto
-
 Na página de [Desenvolvedor do Facebook](https://developers.facebook.com/apps)
 
 ![Ao clicar adicionar novo app](img/ao-clicar-adicionar-novo-aplicativo.png "IMG1: click criar novo aplicativo")
 
 ### Criar ID do projeto
+![Visão geral do painel de configurações](img/visao-geral-painel-configuracoes.png)
 
-![Visão geral do painel de configurações](/home/gigik/Documentos/trocas/esse_semestre/PDM/facebook-apresentacao/img/visao-geral-painel-configuracoes.png)
+### Configurar a conta
+
+![Abrir a seção Configurações do app](img/adicionar-nova-plataforma.png)
+
+___
+
+Adicionar a plataforma Android:
+
+![Ao clicar o botão Adicionar plataforma](img/selecionar-uma-plataforma.png)
+
+___
+
+Preencher com os dados necessários:
+
+![Adicionando a hash](img/adicionar-key-hash-do-app-nativo.png)
+
+### Obter a hash
+
+**ESTE É UM PASSO EXTREMAMENTE IMPORTANTE**
+
+. . .
+
+- No diretório do projeto, digitar o seguinte comando que gerará uma hash para o app:
+
+~~~
+  keytool -exportcert -alias Appeso -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
+~~~
+
+- **MAS** quando foi inserido, deu erro na hash e, no erro, foi dado uma hash válida.
+- No caso, foi gerado depois que o plugin e a plataforma já estavam instalados.
 
 ## Plugin
 
@@ -88,6 +114,89 @@ NOME_APP
 
 Ambos são encontrados na pare de configurações da sessão do desenvolvedor.
 
+## Métodos utilizados
+
+### Documentação
+
+Além da documentação do Plugin, outra boa fonte é o site oficial da API do Facebook.
+
+Encontrado no site [developers do Facebook](https://developers.facebook.com/docs/facebook-login/web)
+
+### getLoginStatus
+
+~~~JavaScript
+FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
+~~~
+
+Retorna o objeto:
+
+~~~JavaScript
+{
+	authResponse: {
+		userID: "12345678912345",
+		accessToken: "kgkh3g42kh4g23kh4g2kh34g2kg4k2h4gkh3g4k2h4gk23h4gk2h34gk234gk2h34AndSoOn",
+		session_Key: true,
+		expiresIn: "5183738",
+		sig: "..."
+	},
+	status: "connected"
+}
+~~~
+
+### getLoginStatus
+
+![No arquivo main.js](img/getLoginStatus.png)
+
+![No arquirvo main.html](img/isLogged-html.png)
+
+### login
+
+~~~JavaScript
+facebookConnectPlugin.logout(Function success, Function failure)
+~~~
+
+Retorna o objeto:
+
+~~~JavaScript
+{
+	status: "connected",
+	authResponse: {
+		session_key: true,
+		accessToken: "<long string>",
+		expiresIn: 5183979,
+		sig: "...",
+		secret: "...",
+		userID: "634565435"
+	}
+}
+~~~
+
+### login
+
+![No arquivo main.js](img/login.png)
+
+![No arquivo main.html](img/login-html.png)
+
+### showDialog
+
+~~~JavaScript
+facebookConnectPlugin.showDialog(options,
+				function (result) {
+    				alert("Posted. " + JSON.stringify(result));				},
+    		function (e) {
+				alert("Failed: " + e);
+			});
+~~~
+
+
+### showDialog
+
+![No arquivo resultado.js](img/showDialog.png)
+
+![No arquivo resultado.html](img/publishImage-html.png)
+
 ## Avaliação do plugin
 
 ### Prós
@@ -99,3 +208,19 @@ Ambos são encontrados na pare de configurações da sessão do desenvolvedor.
 - O plugin é apegado a determinadas versões do Android.
 - Logo, não é possivel usar as versões independentes das coisas.
 - Não é possivel usar a versão mais recente da API.
+- Documentação ainda rudimentar, várias páginas com mesmo conteúdo e poucas instruções mais profundas.
+
+## Links
+### Links
+
+- Facebook developers painel do App: [https://developers.facebook.com/apps](https://developers.facebook.com/apps)
+
+- Pesquisador de plugins Cordova: [https://cordova.apache.org/plugins/?q=facebook&platforms=cordova-android](https://cordova.apache.org/plugins/?q=facebook&platforms=cordova-android)
+
+- Github do plugin oficial do da API da facebook: [https://github.com/Wizcorp/phonegap-facebook-plugin/](https://github.com/Wizcorp/phonegap-facebook-plugin/)
+
+- Github do fork da API 4 do Facebook: [https://github.com/jeduan/cordova-plugin-facebook4](https://github.com/jeduan/cordova-plugin-facebook4)
+
+- Documentação Facebook developers: [https://developers.facebook.com/docs/facebook-login/web](https://developers.facebook.com/docs/facebook-login/web)
+
+- Possível solução para o hash: [http://stackoverflow.com/questions/20073940/sha1-certificate-fingerprint](http://stackoverflow.com/questions/20073940/sha1-certificate-fingerprint)
