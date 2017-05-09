@@ -3,8 +3,9 @@ function pagecontainershow_main(e,ui){
 }
 
 $(function(){
-	$('#txtAltura').mask('00Z', {translation:  {'Z': {pattern: /\d/, optional: true}}});
-	$('#txtPeso').mask('0ZZ,Z', {translation:  {'Z': {pattern: /\d/, optional: true}}, min:30, max:40});
+	$('#txtAltura').mask('999');
+	$('#txtPeso').mask('099.00');
+	$('#txtPeso').val().replace(".", ","));
 });
 
 var validPeso = false;
