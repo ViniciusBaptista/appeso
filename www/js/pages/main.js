@@ -5,7 +5,6 @@ function pagecontainershow_main(e,ui){
 $(function(){
 	$('#txtAltura').mask('999');
 	$('#txtPeso').mask('099.00');
-	$('#txtPeso').val().replace(".", ","));
 });
 
 var validPeso = false;
