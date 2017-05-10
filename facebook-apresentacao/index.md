@@ -120,7 +120,7 @@ NOME_APP
 
 : É o nome que foi definido quando criado o app na sessão de desenvolvedor
 
-Ambos são encontrados na pare de configurações da sessão do desenvolvedor.
+Ambos são encontrados na parte de configurações da sessão do desenvolvedor.
 
 ## Métodos utilizados
 
