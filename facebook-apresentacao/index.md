@@ -15,11 +15,13 @@ Vinicius Baptista
 ## Conta desenvolvedor
 
 ### Criar ID do projeto
+
 Na página de [Desenvolvedor do Facebook](https://developers.facebook.com/apps)
 
 ![Ao clicar adicionar novo app](img/ao-clicar-adicionar-novo-aplicativo.png "IMG1: click criar novo aplicativo")
 
 ### Criar ID do projeto
+
 ![Visão geral do painel de configurações](img/visao-geral-painel-configuracoes.png)
 
 ### Configurar a conta
@@ -49,7 +51,7 @@ Preencher com os dados necessários:
 . . .
 
 - Para obter a hash necessária para a autenticação do app Android deve-se seguir os passos:
-  * No diretório do projeto, digitar o seguinte comando que gerará uma hash de desenvolvimento para o app:
+    * No diretório do projeto, digitar o seguinte comando que gerará uma hash de desenvolvimento para o app:
 
 ~~~bash
   keytool -exportcert -alias Appeso -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
