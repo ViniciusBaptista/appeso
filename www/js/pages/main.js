@@ -55,20 +55,6 @@ $(document).ready(function(){
 
 //http://meumobi.github.io/stocks%20apis/2016/03/13/get-realtime-stock-quotes-yahoo-finance-api.html
 var main = {
-	login: function() {
-    facebookConnectPlugin.login(["public_profile"], function (response) {
-    	console.log(JSON.stringify(response));
-    }, function (response) {
-    	console.log(JSON.stringify(response));
-    });
-	},
-
-	isLogged: function () {
-		facebookConnectPlugin.getLoginStatus(function (status) {
-			console.log("current status: " + JSON.stringify(status));
-		});
-	},
-
 	calcular: function() {
 		//ler dados dos inputs
 		var txtAltura = $('#txtAltura').val();
