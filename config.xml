@@ -27,4 +27,5 @@
         <variable name="APP_ID" value="1926843514219283" />
         <variable name="APP_NAME" value="Appeso" />
     </plugin>
+    <plugin name="cordova-sqlite-storage" spec="~2.0.4" />
 </widget>
