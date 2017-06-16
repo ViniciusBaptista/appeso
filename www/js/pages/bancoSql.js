@@ -99,13 +99,14 @@ function getimcs(last) {
   getData(0);
   getimcs(0);
 */
-switch (action) {
+switch (action) { //para ler o banco, passar como parametro o numero 1, para adicionar ao banco, passar numero 2
   case 1:
     getData(0);
     getimcs(0);
     break;
   case 2:
     addItem(imcdb);
+    break;
   default: console.log("comando invalido, digite 1 para puxar dados do banco, ou 2 para adicionar dados");
 }
 
