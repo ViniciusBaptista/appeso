@@ -1,6 +1,9 @@
 function pagecontainershow_resultado(e,ui){
 	var imc = parseFloat(sessionStorage.getItem("imc"));
 	var imcNumber = imc.toFixed(2);
+	var txt = imcNumber;
+	banco(txt, 2);
+	banco(txt, 1);
 
 	switch(true) {
 		case (imcNumber < 17):
