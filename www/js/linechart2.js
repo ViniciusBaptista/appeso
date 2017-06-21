@@ -8,7 +8,6 @@ function loadLineChartPage() {
     $.mobile.pageContainer.pagecontainer("change", "pages/linechart.html");
 }
 
-
 function salvar(canvasName) {
     console.log(getImage(canvasName));
 }
@@ -35,7 +34,6 @@ function getBlob(canvasName, callback) {
     });
 }
 
-
 function criarGrafico(ano, datas) {
     if (datas.length == 0) {
         $('#box-chart').fadeOut(0);
@@ -43,10 +41,17 @@ function criarGrafico(ano, datas) {
         alert("Ano de referencia não encontrado");
         return false;
     }
-    var dataL1 = [88, 90, 98, 90, 100, 87];
-    var dataL2 = [100, 90, 86, 90, 85, 75];
+    var d = banco(3);
+    var dataL1 = [];
+    var dataL2 = [];
     var label_X1 = [];
     var label_X2 = [];
+
+    for (var i = 0; i < (d.length / 2) ; i++)
+        dataL1.push(d[i]);
+
+    for (var i = d.length / 2; i < d.length; i++)
+        dataL2.push(d[i]);
 
     for (var i = 0; i < (datas.length / 2) ; i++)
         label_X1.push(mes(datas[i]));
@@ -57,13 +62,13 @@ function criarGrafico(ano, datas) {
     //var label_X1 = [mes(datas[0]), mes(datas[1]), mes(datas[2]), mes(datas[3]), mes(datas[4]), mes(datas[5])];
     //var label_X2 = [mes(datas[6]), mes(datas[7]), mes(datas[8]), mes(datas[9]), mes(datas[10]), mes(datas[11])];
 
-    showLineChart("LineChart1", dataL1, dataL2, label_X1, ano);
-    showLineChart("LineChart2", dataL1, dataL2, label_X2, ano);
+    showLineChart("LineChart1", dataL1, label_X1, ano);
+    showLineChart("LineChart2", dataL2, label_X2, ano);
 
     return true;
 }
 
-function showLineChart(canvasName, dataL1, dataL2, label_X, ano) {
+function showLineChart(canvasName, dataL1, label_X, ano) {
     var ctx = $('#' + canvasName).get(0).getContext("2d");
     var LineChart = new Chart(ctx, {
         type: 'line',
@@ -75,14 +80,7 @@ function showLineChart(canvasName, dataL1, dataL2, label_X, ano) {
                 borderWidith: 6,
                 borderColor: 'rgba(77, 166, 253, 0.85)',
                 backgroundColor: 'transparent'
-            },
-			{
-			    label: "2017",
-			    data: dataL2,
-			    borderWidith: 6,
-			    borderColor: 'rgba(6, 204, 6, 0.85)',
-			    backgroundColor: 'transparent'
-			}]
+            }]
         },
         options: {
             title: {
@@ -98,7 +96,7 @@ function showLineChart(canvasName, dataL1, dataL2, label_X, ano) {
 }
 
 function mes(strMes) {
-    switch (strMes.substring(3, 5)) {
+    switch (strMes.substring(0, 5)) {
         case '01':
             return 'Jan';
             break;
@@ -155,32 +153,16 @@ function limitarAno(vetor, ano) {
     return vetor2;
 }
 
-var vetorz = [
-    "13-01-2017",
-    "14-02-2017",
-    "15-03-2016",
-    "16-03-2017",
-    "17-04-2017",
-    "18-05-2017",
-    "19-04-2016",
-    "20-06-2017",
-    "21-05-2016",
-    "22-07-2017",
-    "13-08-2017",
-    "14-09-2017",
-    "15-06-2016",
-    "16-10-2017",
-    "17-11-2017",
-    "18-12-2017",
-    "19-07-2016",
-    "21-08-2016"
-];
-
 function buscar() {
     var txtAno = $('#txtAno').val();
-    var v = limitarAno(vetorz, txtAno);
+    var v = limitarAno(banco(2), txtAno);
     if (criarGrafico(txtAno, v)) {
         $('#box-chart').fadeIn(0);
         $('#box-chart2').fadeIn(0);
     }
 }
+
+
+
+
+
