@@ -28,12 +28,13 @@
         <div data-role="main" class="ui-content" >  
 
             <div class="box-chart">
-                <input id="txtPeso" placeholder="Peso em Kg. Ex: 50" type="text"  />
+                <input id="txtAno" placeholder="digite o Ano. ex: 2017" type="text"  /><br>
+                <center><a onclick='buscar();'  style="width:80%" class="ui-btn ui-shadow">Buscar</a></center>
                 <br><br>
                 
                 <center><h1><b>Histórico</b></h1></center>
                 <canvas id="LineChart1"></canvas>
-                <br><br>              
+                <br><br>
                 <center><a onclick='salvar("LineChart1");'  style="width:80%" class="ui-btn ui-shadow">Salvar</a></center>
             </div>
 

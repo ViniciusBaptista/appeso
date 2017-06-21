@@ -19,12 +19,12 @@ function getImg(canvasName, callback){
 		var reader = new window.FileReader();
 		reader.readAsDataURL(blob); 
 		reader.onloadend = function() {
-			base64data = reader.result;			
+			base64data = reader.result;		
+				
 		}
 		callback(blob);
 	});
 }
-
 
 function criarGrafico(){
 	var dataL1 = [88, 90, 98, 90, 100, 87];
@@ -115,4 +115,36 @@ function mes(strMes){
 
 function print(str){
 	console.log(str);
+}
+
+function limitarAno(vetor, ano){
+	var vetor2 = [];
+	var j, i;
+	for(i = 0, j = 0; i < vetor.length; i++){
+		if(vetor[i].substring(6, 10) == ano){
+			vetor2[j++] = vetor[i];
+		}		
+	}
+	return vetor2;	
+}
+
+var z = [
+	"13-09-2017",
+	"14-09-2017",
+	"15-09-2016",
+	"16-09-2017",
+	"17-09-2017",
+	"18-09-2017",
+	"19-09-2016",
+	"20-09-2017",
+	"21-09-2016",
+	"22-09-2017",
+];
+
+function buscar(){
+	var txtAno = $('#txtAno').val();
+	var v = limitarAno(z, txtAno);
+	for(var i = 0; i < v.length; i++){
+		console.log(v[i]);
+	}
 }
