@@ -18,46 +18,53 @@
 	<script src="plugins/phonegap-facebook-plugin/facebookConnectPlugin.js"></script>
 	<script src="js/pages/bancoSql.js"></script>
 	<script src="js/pages/resultado.js"></script>
+
+	<!-- gambriarra do Gabriel-->
+	<script src="js/Chart.min2.js"></script>
+	<script src="js/canvas-to-blob.min.js"></script>
+	<script src="js/linechart2.js"></script>
+
 </head>
 <body>
 
 	<div id="main" data-role="page">
-			<div id="fb-root"></div>
-			<script src="js/pages/main.js"></script>
-			<div data-role="header" data-position="fixed">
-				<h1 style="margin-left:auto;margin-right:auto">Massa Corporal</h1>
-				<a href="pages/about.html" class=" ui-btn-right ui-btn ui-icon-info ui-btn-icon-notext ui-corner-all">No text</a>
-			</div>
+		<div id="fb-root"></div>
+		<script src="js/pages/main.js"></script>
+		<div data-role="header" data-position="fixed">
+			<h1 style="margin-left:auto;margin-right:auto">Massa Corporal</h1>
+			<a href="pages/about.html" class=" ui-btn-right ui-btn ui-icon-info ui-btn-icon-notext ui-corner-all">No text</a>
+			<a onclick='loadLineChartPage();' class=" ui-btn-left ui-btn ui-icon-info ui-btn-icon-notext ui-corner-all">chart</a>
+		</div>
 
-			<div data-role="main" class="ui-content" >
-				<div class="container">
-					<div style="text-align:center">
-						<a onclick='main.login();'  style="width:80%" class="ui-btn ui-shadow">Logar com Facebook</a>
-					</div>
-					<div style="text-align:center">
-						<a onclick='main.isLogged();'  style="width:80%" class="ui-btn ui-shadow">Está logado?</a>
-					</div>
-				  <form action="" name="calculateImc">
-				  	<div style="position: relative;">
-					    <label for="txtAltura">Altura</label>
-							<input name='txtAltura' type="number" id="txtAltura" placeholder="altura" />
-							<span style="position: absolute; top: 35px; right: 5px">cm</span>
-							<span id="altura-error" class="error"></span>
-						</div>
-				  	<div style="position: relative;">
-					    <label for="txtPeso">Peso</label>
-							<input type="number" name="txtPeso" id="txtPeso" placeholder="peso" />
-							<span style="position: absolute; top: 35px; right: 5px">kg</span>
-							<span id="peso-error" class="error"></span>
-						</div>
-				  </form>
-				</div>
-			</div>
-
-			<div data-role="footer" data-position="fixed" >
+		<div data-role="main" class="ui-content" >
+			<div class="container">
 				<div style="text-align:center">
-					<a onclick='main.valid();'  style="width:80%" class="ui-btn ui-shadow">Calcular</a>
+					<a onclick='main.login();'  style="width:80%" class="ui-btn ui-shadow">Logar com Facebook</a>
 				</div>
+				<div style="text-align:center">
+					<a onclick='main.isLogged();'  style="width:80%" class="ui-btn ui-shadow">Está logado?</a>
+				</div>
+				<form action="" name="calculateImc">
+					<div style="position: relative;">
+						<label for="txtAltura">Altura</label>
+						<input name='txtAltura' type="number" id="txtAltura" placeholder="altura" />
+						<span style="position: absolute; top: 35px; right: 5px">cm</span>
+						<span id="altura-error" class="error"></span>
+					</div>
+					<div style="position: relative;">
+						<label for="txtPeso">Peso</label>
+						<input type="number" name="txtPeso" id="txtPeso" placeholder="peso" />
+						<span style="position: absolute; top: 35px; right: 5px">kg</span>
+						<span id="peso-error" class="error"></span>
+					</div>
+				</form>
 			</div>
+		</div>
+
+		<div data-role="footer" data-position="fixed" >
+			<div style="text-align:center">
+				<a onclick='main.valid();'  style="width:80%" class="ui-btn ui-shadow">Calcular</a>
+			</div>
+		</div>
 	</div>
 </body>
