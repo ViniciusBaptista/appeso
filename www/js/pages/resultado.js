@@ -9,7 +9,8 @@ function pagecontainershow_resultado(e,ui){
 	datas = banco(txt, 2);
 	imcs = banco(txt, 3);
 */
-banco(txt, 1);
+	banco(txt, 1);
+
 	switch(true) {
 		case (imcNumber < 17):
 			$('#labelImc').text('Abaixo de 17');
