@@ -2,9 +2,13 @@ function pagecontainershow_resultado(e,ui){
 	var imc = parseFloat(sessionStorage.getItem("imc"));
 	var imcNumber = imc.toFixed(2);
 	var txt = imcNumber;
-	banco(txt, 2);
+/*  exemplo chamadas do banco, txt provavelmente so e necessario na para inserção
+	var imcs;
+	var datas;
 	banco(txt, 1);
-
+	datas = banco(txt, 2);
+	imcs = banco(txt, 3);
+*/
 	switch(true) {
 		case (imcNumber < 17):
 			$('#labelImc').text('Abaixo de 17');

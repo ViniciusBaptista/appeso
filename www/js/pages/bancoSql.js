@@ -36,6 +36,7 @@ function addItem(imc) {
 
 function getData(last) {
 
+    var datas = [];
     db.transaction(function (tx) {
 
         var query = "SELECT * FROM imcusuario WHERE imc != ?";
@@ -43,8 +44,7 @@ function getData(last) {
         tx.executeSql(query, [last], function (tx, resultSet) {
 
             for(var x = 0; x < resultSet.rows.length; x++) {
-                console.log("IMC: " + resultSet.rows.item(x).imc +
-                    ", Data: " + resultSet.rows.item(x).data);
+              datas.push(resultSet.rows.item(x).data)
 
             }
         },
@@ -56,15 +56,13 @@ function getData(last) {
     }, function () {
         console.log('transaction ok');
     });
+    return datas;
 }
 
 
 function getimcs(last) {
-  var imcs = [];
-  var datas = [];
-  const listaImc = document.querySelector('#imc');
 
-
+    var imcs = [];
     db.transaction(function (tx) {
 
         var query = "SELECT * FROM imcusuario WHERE imc != ?";
@@ -72,15 +70,8 @@ function getimcs(last) {
         tx.executeSql(query, [last], function (tx, resultSet) {
             //Passar para jquery e criar um lugar especifico para display
             for(var x = 0; x < resultSet.rows.length; x++) {
-              var li = document.createElement('li');
-                  li.textContent = "IMC: " + resultSet.rows.item(x).imc + " Data: " + resultSet.rows.item(x).data;
-                  listaImc.appendChild(li);
-                  //imcs.push(resultSet.rows.item(x).imc);
-                  //datas.push(resultSet.rows.item(x).data);
-
+                  imcs.push(resultSet.rows.item(x).imc);
             }
-
-
 
         },
         function (tx, error) {
@@ -91,7 +82,7 @@ function getimcs(last) {
     }, function () {
         console.log('transaction ok');
     });
-
+    return imcs;
 }
 
 /*
@@ -99,13 +90,20 @@ function getimcs(last) {
   getData(0);
   getimcs(0);
 */
-switch (action) { //para ler o banco, passar como parametro o numero 1, para adicionar ao banco, passar numero 2
+
+var returnimc;
+var returndata;
+switch (action) { //para inserir no banco 1, para puxar datas 2, para puxar imcs 3
   case 1:
-    getData(0);
-    getimcs(0);
+    addItem(imcdb);
     break;
   case 2:
-    addItem(imcdb);
+    returndata = getData(0);
+    return returndata;
+    break;
+  case 3:
+  returnimc = getimcs(0);
+  return returnimc;
     break;
   default: console.log("comando invalido, digite 1 para puxar dados do banco, ou 2 para adicionar dados");
 }
