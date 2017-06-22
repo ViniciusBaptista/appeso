@@ -46,11 +46,13 @@ function criarGrafico(ano, datas) {
     var dataL2 = [];
     var label_X1 = [];
     var label_X2 = [];
-    var batata = [2.3, 3.4, 3.3, 6.8, 8.8];
+    /*var batata = [2.3, 3.4, 3.3, 6.8, 8.8];
 
     for (var i = 0; i < (batata.length / 2) ; i++)
         dataL1.push(parseFloat(d[i]));
-
+*/
+    for (var i = 0; i < (d.length / 2) ; i++)
+        dataL1.push(parseFloat(d[i]));
     for (var i = d.length / 2; i < d.length; i++)
         dataL2.push(parseFloat(d[i]));
 
