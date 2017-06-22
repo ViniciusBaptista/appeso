@@ -44,7 +44,7 @@ function banco(imcdb, action) {
                     tx.executeSql(query, [last], function (tx, resultSet) {
 
                         for (var x = 0; x < resultSet.rows.length; x++) {
-                            datas.push(resultSet.rows.item(x).data)
+                            datas.push(resultSet.rows.item(x).data);
 
                         }
                     },
@@ -99,10 +99,16 @@ function banco(imcdb, action) {
                     break;
                 case 2:
                     returndata = getData(0);
+                    /*for (let i = 0; i < returndata.length; i++){
+                      console.log("batata  " + returndata[i]);
+                    }*/
                     return returndata;
                     break;
                 case 3:
                     returnimc = getimcs(0);
+                    /*for (let i = 0; i < returnimc.length; i++){
+                      console.log("batata  " + returnimc[i]);
+                    }*/
                     return returnimc;
                     break;
                 default:

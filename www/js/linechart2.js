@@ -15,7 +15,7 @@ function salvar(canvasName) {
 function getImage(canvasName) {
     var a;
     getBlob(canvasName, function (blob) {
-        //saveAs(blob, canvasName + ".png");	
+        //saveAs(blob, canvasName + ".png");
         console.log(blob);
         a = blob;
     });
@@ -38,20 +38,21 @@ function criarGrafico(ano, datas) {
     if (datas.length == 0) {
         $('#box-chart').fadeOut(0);
         $('#box-chart2').fadeOut(0);
-        alert("Ano de referencia não encontrado");
+        alert("Ano de referencia n�o encontrado");
         return false;
     }
-    var d = banco(3);
+    var d = banco("",3);
     var dataL1 = [];
     var dataL2 = [];
     var label_X1 = [];
     var label_X2 = [];
+    var batata = [2.3, 3.4, 3.3, 6.8, 8.8];
 
-    for (var i = 0; i < (d.length / 2) ; i++)
-        dataL1.push(d[i]);
+    for (var i = 0; i < (batata.length / 2) ; i++)
+        dataL1.push(parseFloat(d[i]));
 
     for (var i = d.length / 2; i < d.length; i++)
-        dataL2.push(d[i]);
+        dataL2.push(parseFloat(d[i]));
 
     for (var i = 0; i < (datas.length / 2) ; i++)
         label_X1.push(mes(datas[i]));
@@ -146,7 +147,7 @@ function limitarAno(vetor, ano) {
     var vetor2 = [];
     var j, i;
     for (i = 0, j = 0; i < vetor.length; i++) {
-        if (vetor[i].substring(6, 10) == ano) {
+        if (vetor[i].substring(0, 4) == ano) {
             vetor2[j++] = vetor[i];
         }
     }
@@ -155,14 +156,9 @@ function limitarAno(vetor, ano) {
 
 function buscar() {
     var txtAno = $('#txtAno').val();
-    var v = limitarAno(banco(2), txtAno);
+    var v = limitarAno(banco("",2), txtAno);
     if (criarGrafico(txtAno, v)) {
         $('#box-chart').fadeIn(0);
         $('#box-chart2').fadeIn(0);
     }
 }
-
-
-
-
-
