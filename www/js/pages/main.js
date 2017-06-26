@@ -80,6 +80,7 @@ var main = {
 		//salvar no sessionstorage
 		sessionStorage.setItem("imc", imc.toString() );
 	   //navegar para a próxima página
+		banco(imc, "add");
 		$.mobile.pageContainer.pagecontainer("change", "pages/resultado.html");
 	},
 

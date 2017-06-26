@@ -1,6 +1,6 @@
-
 function pagecontainershow_linechart(e, ui) {
-    //	criarGrafico("2017", limitarAno(vetorz, '2017'));
+    clear(dadosBD);
+    banco("", "get");
 }
 
 function loadLineChartPage() {
@@ -29,57 +29,58 @@ function getBlob(canvasName, callback) {
         reader.onloadend = function () {
             base64data = reader.result;
             console.log(base64data);
+            //saveAs(blob, canvasName + ".png");
         }
         callback(blob);
     });
 }
 
-function criarGrafico(ano, datas) {
-    if (datas.length == 0) {
+function criarGrafico(ano, datasEimcs) {
+    if (datasEimcs.length == 0) {
         $('#box-chart').fadeOut(0);
         $('#box-chart2').fadeOut(0);
-        alert("Ano de referencia n�o encontrado");
+        alert("Ano de referência não encontrado");
         return false;
     }
-    var d = banco("",3);
-    var dataL1 = [];
-    var dataL2 = [];
+
+    var L1 = [];
+    var L2 = [];
     var label_X1 = [];
     var label_X2 = [];
-    /*var batata = [2.3, 3.4, 3.3, 6.8, 8.8];
 
-    for (var i = 0; i < (batata.length / 2) ; i++)
-        dataL1.push(parseFloat(d[i]));
-*/
-    for (var i = 0; i < (d.length / 2) ; i++)
-        dataL1.push(parseFloat(d[i]));
-    for (var i = d.length / 2; i < d.length; i++)
-        dataL2.push(parseFloat(d[i]));
 
-    for (var i = 0; i < (datas.length / 2) ; i++)
-        label_X1.push(mes(datas[i]));
+    var Len = datasEimcs.length;
+    var len2 = parseInt(Len / 2);
 
-    for (var i = datas.length / 2; i < datas.length; i++)
-        label_X2.push(mes(datas[i]));
+    for (var i = 0; i < len2; i++)
+        L1.push(parseFloat(datasEimcs[i].substring(11, datasEimcs[i].length)));
 
-    //var label_X1 = [mes(datas[0]), mes(datas[1]), mes(datas[2]), mes(datas[3]), mes(datas[4]), mes(datas[5])];
-    //var label_X2 = [mes(datas[6]), mes(datas[7]), mes(datas[8]), mes(datas[9]), mes(datas[10]), mes(datas[11])];
+    console.log("tamanho do len/2: " + Len / 2);
+    for (var i = len2; i < Len; i++)
+        L2.push(parseFloat(datasEimcs[i].substring(11, datasEimcs[i].length)));
 
-    showLineChart("LineChart1", dataL1, label_X1, ano);
-    showLineChart("LineChart2", dataL2, label_X2, ano);
+    for (var i = 0; i < len2; i++)
+        label_X1.push(mes(datasEimcs[i]));
+
+    for (var i = len2; i < Len; i++)
+        label_X2.push(mes(datasEimcs[i]));
+
+
+    showLineChart("LineChart1", L1, label_X1, ano);
+    showLineChart("LineChart2", L2, label_X2, ano);
 
     return true;
 }
 
-function showLineChart(canvasName, dataL1, label_X, ano) {
+function showLineChart(canvasName, dadosLinha, label_X, ano) {
     var ctx = $('#' + canvasName).get(0).getContext("2d");
     var LineChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: label_X,
             datasets: [{
-                label: "2016",
-                data: dataL1,
+                label: ano,
+                data: dadosLinha,
                 borderWidith: 6,
                 borderColor: 'rgba(77, 166, 253, 0.85)',
                 backgroundColor: 'transparent'
@@ -99,7 +100,7 @@ function showLineChart(canvasName, dataL1, label_X, ano) {
 }
 
 function mes(strMes) {
-    switch (strMes.substring(0, 5)) {
+    switch (strMes.substring(5, 7)) {
         case '01':
             return 'Jan';
             break;
@@ -158,9 +159,85 @@ function limitarAno(vetor, ano) {
 
 function buscar() {
     var txtAno = $('#txtAno').val();
-    var v = limitarAno(banco("",2), txtAno);
-    if (criarGrafico(txtAno, v)) {
+    var vetLimitado = limitarAno(dadosBD, txtAno);
+    if (criarGrafico(txtAno, vetLimitado)) {
         $('#box-chart').fadeIn(0);
         $('#box-chart2').fadeIn(0);
     }
 }
+
+function clear(array) {
+    while (array.length > 0) {
+        array.pop();
+    }
+}
+
+var dadosBD = [];
+
+function banco(imcdb, op) {
+    document.addEventListener('deviceready', function () {
+        var db = window.sqlitePlugin.openDatabase({ name: 'bancomobile.db', location: 'default' }, function (db) {
+
+            db.transaction(function (tx) {
+                tx.executeSql('CREATE TABLE IF NOT EXISTS imcusuario (id INTEGER PRIMARY KEY ASC AUTOINCREMENT NOT NULL, imc  DOUBLE (3, 2) NOT NULL, data DATE DEFAULT (CURRENT_DATE));)');
+            }, function (error) {
+                console.log('transaction error: ' + error.message);
+            }, function () {
+                console.log('tabela criada/aberta com sucesso!');
+            });
+
+            function addItem(imc) {
+                db.transaction(function (tx) {
+                    var query = "INSERT INTO imcusuario (imc) VALUES (?)";
+                    tx.executeSql(query, [imc], function (tx, res) {
+                        console.log("insertId: " + res.insertId + " -- probably 1");
+                        console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
+                    },
+                    function (tx, error) {
+                        console.log('INSERT error: ' + error.message);
+                    });
+                }, function (error) {
+                    console.log('transaction error: ' + error.message);
+                }, function () {
+                    console.log('Item adicionado');
+                });
+            }
+
+            function getItens() {
+                db.transaction(function (tx) {
+
+                    var query = "SELECT * FROM imcusuario";
+
+                    tx.executeSql(query, [], function (tx, resultSet) {
+                        //Passar para jquery e criar um lugar especifico para display
+                        var formato;
+                        for (var x = 0; x < resultSet.rows.length; x++) {
+                            formato = resultSet.rows.item(x).data + " " + resultSet.rows.item(x).imc;
+                            dadosBD.push(formato);
+                            console.log(formato);
+                        }
+                    },
+                    function (tx, error) {
+                        console.log('SELECT error: ' + error.message);
+                    });
+                }, function (error) {
+                    console.log('transaction error: ' + error.message);
+                }, function () {
+                    console.log('Select Executado');
+                });
+            }
+
+            
+            if (op === 'add')
+                addItem(imcdb.toFixed(2));
+            if (op === 'get') {
+                clear(dadosBD);
+                getItens(0);
+            }
+
+        }, function (error) {
+            console.log('Open database ERROR: ' + JSON.stringify(error));
+        });
+    });
+}
+

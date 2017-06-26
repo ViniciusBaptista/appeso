@@ -1,7 +1,7 @@
-function banco(imcdb, action) {
+function banco(imcdb) {
 
     document.addEventListener('deviceready', function () {
-        var db = window.sqlitePlugin.openDatabase({name: 'prototipo.db', location: 'default'}, function (db) {
+        var db = window.sqlitePlugin.openDatabase({ name: 'prototipo.db', location: 'default' }, function (db) {
 
             // Here, you might create or open the table.
             db.transaction(function (tx) {
@@ -34,43 +34,22 @@ function banco(imcdb, action) {
             }
 
 
-            function getData(last) {
-
-                var datas = [];
-                db.transaction(function (tx) {
-
-                    var query = "SELECT * FROM imcusuario WHERE imc != ?";
-
-                    tx.executeSql(query, [last], function (tx, resultSet) {
-
-                        for (var x = 0; x < resultSet.rows.length; x++) {
-                            datas.push(resultSet.rows.item(x).data);
-
-                        }
-                    },
-                            function (tx, error) {
-                                console.log('SELECT error: ' + error.message);
-                            });
-                }, function (error) {
-                    console.log('transaction error: ' + error.message);
-                }, function () {
-                    console.log('transaction ok');
-                });
-                return datas;
-            }
 
 
             function getimcs(last) {
 
-                var imcs = [];
+
                 db.transaction(function (tx) {
 
                     var query = "SELECT * FROM imcusuario WHERE imc != ?";
 
                     tx.executeSql(query, [last], function (tx, resultSet) {
                         //Passar para jquery e criar um lugar especifico para display
+                        var formato;
                         for (var x = 0; x < resultSet.rows.length; x++) {
-                            imcs.push(resultSet.rows.item(x).imc);
+                            formato = "" + resultSet.rows.item(x).data + " " + resultSet.rows.item(x).imc + "";
+                            dadosBD.push(formato);
+
                         }
 
                     },
@@ -82,7 +61,7 @@ function banco(imcdb, action) {
                 }, function () {
                     console.log('transaction ok');
                 });
-                return imcs;
+
             }
 
             /*
@@ -90,31 +69,10 @@ function banco(imcdb, action) {
              getData(0);
              getimcs(0);
              */
-
-            var returnimc;
-            var returndata;
-            switch (action) { //para inserir no banco 1, para puxar datas 2, para puxar imcs 3
-                case 1:
-                    addItem(imcdb);
-                    break;
-                case 2:
-                    returndata = getData(0);
-                    /*for (let i = 0; i < returndata.length; i++){
-                      console.log("batata  " + returndata[i]);
-                    }*/
-                    return returndata;
-                    break;
-                case 3:
-                    returnimc = getimcs(0);
-                    /*for (let i = 0; i < returnimc.length; i++){
-                      console.log("batata  " + returnimc[i]);
-                    }*/
-                    return returnimc;
-                    break;
-                default:
-                    console.log("comando invalido, digite 1 para puxar dados do banco, ou 2 para adicionar dados");
-            }
-
+            //var imcs = [];
+            //  var datas = [];
+            //  var returnimc;
+            //var returndata;
 
 
 
