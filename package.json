@@ -1,0 +1,24 @@
+{
+    "name": "br.com.appeso.fatec",
+    "version": "1.0.0",
+    "displayName": "Appeso",
+    "cordova": {
+        "platforms": [
+            "android"
+        ],
+        "plugins": {
+            "cordova-plugin-facebook4": {
+                "APP_ID": "1926843514219283",
+                "APP_NAME": "Appeso"
+            },
+            "cordova-plugin-whitelist": {},
+            "cordova-sqlite-storage": {}
+        }
+    },
+    "dependencies": {
+        "cordova-android": "~6.2.3",
+        "cordova-plugin-facebook4": "~1.7.4",
+        "cordova-plugin-whitelist": "1",
+        "cordova-sqlite-storage": "~2.0.4"
+    }
+}
