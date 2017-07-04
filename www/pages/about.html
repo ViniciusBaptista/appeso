@@ -1,57 +1,70 @@
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<title>Ecoponto</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="../css/jqm/jquery.mobile-1.4.5.min.css" />
-		<link rel="stylesheet" href="../css/jqm/jquery.mobile.icons.min.css" />
-		<link rel="stylesheet" href="../css/jqm/jquery.mobile.structure-1.4.5.min.css" />
-		<link rel="stylesheet" href="../css/about.css" />
-	</head>
-	<body>
-		<div data-role="page">
-			<div data-role="header" data-position="fixed">
-				<h1>About</h1>
-				<a href="../main.html" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">No text</a>
-			</div>
-			<div data-role="main" class="ui-content" >
-				<div class="ui-corner-all custom-corners">
-				  <div class="ui-bar ui-bar-a">
-					 <h3>Motivação</h3>
-				  </div>
-				  <div class="ui-body ui-body-a">
-					 <p>Esse projeto foi criado com o intuido de instruir as pessoas sobre o seu indice de massa corporal, e alerta-las do perigo de um imc alto.</p>
-				  </div>
-				</div>
-				<div style="margin-top:10px" class="ui-corner-all custom-corners">
-				  <div class="ui-bar ui-bar-a">
-					 <h3>Garantias</h3>
-				  </div>
-				  <div class="ui-body ui-body-a">
-					 <p>Nenhuma garantia de qualquer natureza está presente!</p>
-				  </div>
-				</div>
+﻿<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Ecoponto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/jqm/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="../css/jqm/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../css/jqm/jquery.mobile.structure-1.4.5.min.css" />
+    <link rel="stylesheet" href="../css/about.css" />
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header" data-position="fixed">
+            <h1>About</h1>
+            <a href="../main.html" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">No text</a>
+        </div>
+        <div data-role="main" class="ui-content">
+            <div class="ui-corner-all custom-corners">
+                <div class="ui-bar ui-bar-a">
+                    <h3>Motivação</h3>
+                </div>
+                <div class="ui-body ui-body-a">
+                    <p>Esse projeto foi criado com o intuido de instruir as pessoas sobre o seu indice de massa corporal, e alerta-las do perigo de um imc alto.</p>
+                </div>
+            </div>
+            <div style="margin-top:10px" class="ui-corner-all custom-corners">
+                <div class="ui-bar ui-bar-a">
+                    <h3>Garantias</h3>
+                </div>
+                <div class="ui-body ui-body-a">
+                    <p>Nenhuma garantia de qualquer natureza está presente!</p>
+                </div>
+            </div>
 
-				<div style="margin-top:10px" class="ui-corner-all custom-corners my-page">
-				  <div class="ui-bar ui-bar-a">
-					 <h3>Equipe</h3>
-				  </div>
-				  <div class="ui-body ui-body-a">
-					 	<p>Abaixo a lista dos integrantes da equipe:</p>
-	         	<ul data-role="listview" data-inset="true">
-		          <li >
-		          	<a href="#">
-		              <img src="../img/me.jpg" class="ui-li-thumb" />
-		              <h2>Vinicius</h2>
-		              <p>Desenvolvedor</p>
-		         		</a>
-		          </li>
-		        </ul>
-				  </div>
-				</div>
-			</div>
-		</div>
-		<script src="../js/jqm/jquery.js"></script>
-		<script src="../js/jqm/jquery.mobile-1.4.5.min.js"></script>
-	</body>
+            <div style="margin-top:10px" class="ui-corner-all custom-corners my-page">
+                <div class="ui-bar ui-bar-a">
+                    <h3>Equipe</h3>
+                </div>
+                <div class="ui-body ui-body-a">
+                    <p>Abaixo a lista dos integrantes da equipe:</p>
+                    <ul data-role="listview" data-inset="true">
+                        <li>
+                            <a href="#">
+                                <img src="../img/me.jpg" class="ui-li-thumb" />
+                                <h2>Vinicius</h2>
+                                <p>Desenvolvedor</p>
+                            </a>
+                        </li>
+                        <br>
+                        <li>
+                            <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">
+                                <img src="../img/Gabriel.jpg" class="ui-li-thumb" />
+										  <h2>Gabriel</h2>
+                                <p>Desenvolvedor</p>
+                                <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
+                                    <p>Gabriel Martins Monteiro da Silva, 20 anos, estudante da Fatec Carapicuíba, no curso de Analise e Desenvolvimento de Sistemas</p>
+                                </div>
+
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/jqm/jquery.js"></script>
+    <script src="../js/jqm/jquery.mobile-1.4.5.min.js"></script>
+</body>
 </html>

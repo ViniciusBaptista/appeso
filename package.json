@@ -16,7 +16,7 @@
         }
     },
     "dependencies": {
-        "cordova-android": "~6.2.3",
+        "cordova-android": "^6.2.3",
         "cordova-plugin-facebook4": "~1.7.4",
         "cordova-plugin-whitelist": "1",
         "cordova-sqlite-storage": "~2.0.4"
