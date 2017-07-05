@@ -8,18 +8,10 @@ function loadLineChartPage() {
     $.mobile.pageContainer.pagecontainer("change", "pages/linechart.html");
 }
 
-function salvar(canvasName) {
-    console.log(getImage(canvasName));
-}
-
-function getImage(canvasName) {
-    var a;
+function share(canvasName) {
     getBlob(canvasName, function (blob) {
-        //saveAs(blob, canvasName + ".png");
-        console.log(blob);
-        a = blob;
+        resultado.publishAImage(blob);
     });
-    return a;
 }
 
 function getBlob(canvasName, callback) {
@@ -241,3 +233,18 @@ function banco(imcdb, op) {
     });
 }
 
+var resultado = {
+    publishAImage: function(media1) {
+        facebookConnectPlugin.showDialog(
+        {
+            method: "feed",
+            media: media1,
+            name:'Test Post',
+            message:'First photo post',
+            caption: 'Testing using phonegap plugin',
+            description: 'Posting photo using phonegap facebook plugin'
+        },
+        function (response) { console.log(JSON.stringify(response)) },
+        function (response) { console.log(JSON.stringify(response)) });
+    }
+};

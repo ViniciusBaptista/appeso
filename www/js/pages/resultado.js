@@ -34,19 +34,3 @@ function pagecontainershow_resultado(e,ui){
 	var txtImc = imcNumber.toString().replace(".", ",");
 	$('#txtImc').text(txtImc);
 };
-
-var resultado = {
-	publishAImage: function() {
-		facebookConnectPlugin.showDialog(
-	    {
-	        method: "feed",
-	        href:'https://www.google.co.jp/logos/doodles/2014/doodle-4-google-2014-japan-winner-5109465267306496.2-hp.png',
-	        name:'Test Post',
-	        message:'First photo post',
-	        caption: 'Testing using phonegap plugin',
-	        description: 'Posting photo using phonegap facebook plugin'
-	    },
-	    function (response) { console.log(JSON.stringify(response)) },
-	    function (response) { console.log(JSON.stringify(response)) });
-	}
-};
